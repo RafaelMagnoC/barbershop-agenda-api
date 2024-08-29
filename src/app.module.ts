@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DatabaseModule } from './config/database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsuarioModule } from './usuario/usuario.module';
+import { dataSourceOptions } from './config/database/data-source';
 
 @Module({
   imports: [
@@ -10,7 +12,8 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
       expandVariables: true,
     }),
-    DatabaseModule,
+    TypeOrmModule.forRoot(dataSourceOptions),
+    UsuarioModule,
   ],
   controllers: [AppController],
   providers: [AppService],
