@@ -1,19 +1,24 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsuarioModule } from './usuario/usuario.module';
-import { dataSourceOptions } from './config/database/data-source';
+import { appconfig, dbconfig } from './config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      expandVariables: true,
+      cache: true,
+      load: [appconfig, dbconfig],
     }),
-    TypeOrmModule.forRoot(dataSourceOptions),
-    UsuarioModule,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        ...configService.get('dbconnection'),
+      }),
+      inject: [ConfigService],
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
