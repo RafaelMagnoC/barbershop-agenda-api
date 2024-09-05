@@ -2,12 +2,21 @@ import {
   IsBoolean,
   IsDate,
   IsEnum,
+  IsOptional,
   IsString,
   Matches,
   ValidateIf,
 } from 'class-validator';
 import { Genero as Genero_Enum } from 'src/enums/genero.enum';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Contato } from 'src/modules/contato/entities/contato.entity';
+import { Endereco } from 'src/modules/endereco/entities/endereco.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity({ name: 'usuario' })
 export class Usuario {
@@ -28,6 +37,7 @@ export class Usuario {
   @Column({ type: Date, nullable: true })
   data_nascimento: Date;
 
+  @IsOptional()
   @IsEnum(Genero_Enum, { message: 'Escolha uma opção da lista de gêneros' })
   @Column({ type: 'enum', enum: Genero_Enum, nullable: false })
   genero: Genero_Enum;
@@ -36,9 +46,10 @@ export class Usuario {
   @Column({ type: Boolean, default: true })
   ativo: boolean;
 
+  @IsOptional()
   @IsString({ message: 'Token inválido' })
   @ValidateIf((o) => o.token !== null)
-  @Column({ type: String, nullable: true })
+  @Column({ type: String, nullable: true, default: null })
   token: string;
 
   @IsDate({ message: 'Data de criação não é válida' })
@@ -57,4 +68,14 @@ export class Usuario {
     nullable: true,
   })
   data_atualizacao: Date;
+
+  //relações:
+
+  @OneToOne(() => Contato)
+  @JoinColumn({ name: 'contato_id' })
+  contato: Contato;
+
+  @OneToOne(() => Endereco)
+  @JoinColumn({ name: 'endereco_id' })
+  endereco: Endereco;
 }
