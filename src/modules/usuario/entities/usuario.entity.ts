@@ -7,7 +7,7 @@ import {
   Matches,
   ValidateIf,
 } from 'class-validator';
-import { Genero as Genero_Enum } from 'src/enums/genero.enum';
+import { Genero } from 'src/enums/genero.enum';
 import { Contato } from 'src/modules/contato/entities/contato.entity';
 import { Endereco } from 'src/modules/endereco/entities/endereco.entity';
 export class Usuario {
@@ -25,8 +25,8 @@ export class Usuario {
   data_nascimento: Date;
 
   @IsOptional()
-  @IsEnum(Genero_Enum, { message: 'Escolha uma opção da lista de gêneros' })
-  genero: Genero_Enum;
+  @IsEnum(Genero, { message: 'Escolha uma opção da lista de gêneros' })
+  genero: Genero;
 
   @IsBoolean({ message: 'Determine se o usuário está ativo ou inativo' })
   ativo: boolean;
@@ -37,11 +37,9 @@ export class Usuario {
   token: string;
 
   @IsDate({ message: 'Data de criação não é válida' })
-  
   data_criacao: Date;
 
   @IsDate({ message: 'Data de atualização não é válida' })
- 
   data_atualizacao: Date;
 
   //relações:

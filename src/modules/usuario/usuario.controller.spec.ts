@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsuarioController } from './usuario.controller';
 import { UsuarioService } from './usuario.service';
+import { Genero } from 'src/enums/genero.enum';
 
 describe('UsuarioController', () => {
   let controller: UsuarioController;
