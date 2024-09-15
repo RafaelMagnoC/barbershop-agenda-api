@@ -11,7 +11,10 @@ import { UsuarioModule } from './modules/usuario/usuario.module';
       isGlobal: true,
       cache: true,
       expandVariables: true,
-      envFilePath: ['.env.prod', '.env.dev'],
+      envFilePath:
+        process.env.NODE_ENV === 'production'
+          ? '.env.production'
+          : '.env.development',
     }),
     UsuarioModule,
     ContatoModule,
