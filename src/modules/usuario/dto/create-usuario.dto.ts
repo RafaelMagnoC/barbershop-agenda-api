@@ -8,9 +8,9 @@ import {
   Matches,
   ValidateIf,
 } from 'class-validator';
-import { Genero } from 'src/enums/genero.enum';
-import { CreateContatoDto } from 'src/modules/contato/dto/create-contato.dto';
-import { CreateEnderecoDto } from 'src/modules/endereco/dto/create-endereco.dto';
+import { Genero } from '../../../enums/genero';
+import { CreateContatoDto } from '../../contato/dto/create-contato.dto';
+import { CreateEnderecoDto } from '../../endereco/dto/create-endereco.dto';
 
 export class CreateUsuarioDto {
   @ApiProperty({
