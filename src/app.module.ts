@@ -10,7 +10,8 @@ import { UsuarioModule } from './modules/usuario/usuario.module';
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
-      expandVariables: true
+      expandVariables: true,
+      envFilePath: ['.env.prod', '.env.dev'],
     }),
     UsuarioModule,
     ContatoModule,
