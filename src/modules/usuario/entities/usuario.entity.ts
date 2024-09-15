@@ -7,7 +7,7 @@ import {
   Matches,
   ValidateIf,
 } from 'class-validator';
-import { Genero } from 'src/enums/genero.enum';
+import { Genero } from 'src/enums/genero';
 import { Contato } from 'src/modules/contato/entities/contato.entity';
 import { Endereco } from 'src/modules/endereco/entities/endereco.entity';
 export class Usuario {
