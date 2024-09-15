@@ -2,10 +2,10 @@ import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
   const config = new DocumentBuilder()
     .setTitle('Yago Barber Shop')
     .setDescription('api para gerenciar recursos do sistema Yago Barber Shop')
@@ -16,6 +16,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document, {
     jsonDocumentUrl: 'api/json',
   });
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(process.env.server_port);
 }
 bootstrap();

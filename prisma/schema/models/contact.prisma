@@ -5,8 +5,8 @@ model Contact {
   email     String? @unique
   facebook String? @unique
   instagram String? @unique
-  created_at DateTime @default(now())
-  updated_at DateTime 
+  created_at DateTime? @default(now())
+  updated_at DateTime? 
 
 
   //relations

@@ -20,7 +20,7 @@ export class CreateContatoDto {
   @IsOptional()
   @IsString({ message: 'O telefone deve ser uma string' })
   @Length(10, 15, { message: 'O telefone deve ter entre 10 e 15 caracteres' })
-  telefone: string;
+  phone: string;
 
   @ApiProperty({
     description: 'O WhatsApp do usuário',

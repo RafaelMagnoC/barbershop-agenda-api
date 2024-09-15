@@ -18,7 +18,7 @@ export class Contato {
   @IsOptional()
   @IsString({ message: 'O telefone deve ser uma string' })
   @Length(10, 15, { message: 'O telefone deve ter entre 10 e 15 caracteres' })
-  telefone: string;
+  phone: string;
 
   @IsOptional()
   @IsString({ message: 'O WhatsApp deve ser uma string' })
@@ -36,8 +36,8 @@ export class Contato {
   facebook: string;
 
   @IsDate({ message: 'Data de criação não é válida' })
-  data_criacao: Date;
+  created_at: Date;
 
   @IsDate({ message: 'Data de atualização não é válida' })
-  data_atualizacao: Date;
+  updated_at: Date;
 }
