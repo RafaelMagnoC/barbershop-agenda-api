@@ -4,8 +4,9 @@ import { UpdateEnderecoDto } from './dto/update-endereco.dto';
 
 @Injectable()
 export class EnderecoService {
-  create(createEnderecoDto: CreateEnderecoDto) {
-    return 'This action adds a new endereco';
+
+  create(createEnderecoDto: CreateEnderecoDto)  {
+    return `This new anddress created`
   }
 
   findAll() {

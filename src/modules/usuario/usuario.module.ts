@@ -3,6 +3,7 @@ import { UsuarioService } from './usuario.service';
 import { UsuarioController } from './usuario.controller';
 
 @Module({
+  imports: [],
   controllers: [UsuarioController],
   providers: [UsuarioService],
 })

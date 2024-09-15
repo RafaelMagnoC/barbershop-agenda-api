@@ -1,13 +1,10 @@
 import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const configService = app.get(ConfigService);
-  const port = configService.get(`server_port`);
 
   const config = new DocumentBuilder()
     .setTitle('Yago Barber Shop')
@@ -19,6 +16,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document, {
     jsonDocumentUrl: 'api/json',
   });
-  await app.listen(port);
+  await app.listen(process.env.server_port);
 }
 bootstrap();

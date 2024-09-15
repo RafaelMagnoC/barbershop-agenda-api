@@ -1,0 +1,17 @@
+model Address {
+  id              String             @id @default(uuid())
+  street   String
+  number String?
+  complement String?
+  city     String?
+  state    String?
+  zipCode  String?
+  created_at DateTime @default(now())
+  updated_at DateTime 
+
+  //relations
+  user     User?  @relation
+
+  //maps
+  @@map("addresses")
+}

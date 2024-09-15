@@ -1,13 +1,30 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { EnderecoService } from './endereco.service';
 import { CreateEnderecoDto } from './dto/create-endereco.dto';
 import { UpdateEnderecoDto } from './dto/update-endereco.dto';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('endereco')
 @Controller('endereco')
 export class EnderecoController {
   constructor(private readonly enderecoService: EnderecoService) {}
 
   @Post()
+  @ApiOperation({ summary: 'Cria um novo endereco' })
+  @ApiBody({ type: CreateEnderecoDto })
+  @ApiResponse({
+    status: 201,
+    description: 'Endereco criado com sucesso',
+    type: CreateEnderecoDto,
+  })
   create(@Body() createEnderecoDto: CreateEnderecoDto) {
     return this.enderecoService.create(createEnderecoDto);
   }
@@ -23,7 +40,10 @@ export class EnderecoController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEnderecoDto: UpdateEnderecoDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateEnderecoDto: UpdateEnderecoDto
+  ) {
     return this.enderecoService.update(+id, updateEnderecoDto);
   }
 

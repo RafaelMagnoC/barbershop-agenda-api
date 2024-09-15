@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { CreateContatoDto } from './dto/create-contato.dto';
 import { UpdateContatoDto } from './dto/update-contato.dto';
+import { Contato } from './entities/contato.entity';
 
 @Injectable()
 export class ContatoService {
+
   create(createContatoDto: CreateContatoDto) {
     return 'This action adds a new contato';
   }

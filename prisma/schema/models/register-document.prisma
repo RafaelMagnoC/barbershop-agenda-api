@@ -1,0 +1,13 @@
+model RegisterDocument {
+  id              String             @id @default(uuid())
+  cpf  String @unique
+  rg String @unique
+  created_at DateTime @default(now())
+  updated_at DateTime
+
+  //relations 
+  user     User?  @relation
+
+  //maps
+  @@map("register_documents")
+}
