@@ -13,5 +13,5 @@ model Contact {
   user      User?  @relation
 
   //maps
-  @@map("contacts") // Optional: Maps the model to a different table name
+  @@map("contact") // Optional: Maps the model to a different table name
 }

@@ -24,17 +24,17 @@ export class ContatoController {
 
   @Get()
   contacts() {
-    return this.contatoService.findAll();
+    return this.contatoService.find_many();
   }
 
   @Get(':id')
   contact(@Param('id') id: string) {
-    return this.contatoService.findOne(id);
+    return this.contatoService.find_unique(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateContatoDto: UpdateContatoDto) {
-    return this.contatoService.update(id, updateContatoDto);
+  edit(@Param('id') id: string, @Body() updateContatoDto: UpdateContatoDto) {
+    return this.contatoService.edit(id, updateContatoDto);
   }
 
   @Delete(':id')

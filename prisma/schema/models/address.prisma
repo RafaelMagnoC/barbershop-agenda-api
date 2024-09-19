@@ -1,17 +1,18 @@
 model Address {
   id              String             @id @default(uuid())
-  street   String
+  street   String?
   number String?
   complement String?
+  district String?
   city     String?
   state    String?
   zipCode  String?
   created_at DateTime @default(now())
-  updated_at DateTime 
+  updated_at DateTime? 
 
   //relations
   user     User?  @relation
 
   //maps
-  @@map("addresses")
+  @@map("address")
 }

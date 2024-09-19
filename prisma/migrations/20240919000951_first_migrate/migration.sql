@@ -1,29 +1,35 @@
 -- CreateTable
-CREATE TABLE `addresses` (
+CREATE TABLE `address` (
     `id` VARCHAR(191) NOT NULL,
     `street` VARCHAR(191) NOT NULL,
-    `number` VARCHAR(191) NOT NULL,
-    `complement` VARCHAR(191) NOT NULL,
-    `city` VARCHAR(191) NOT NULL,
-    `state` VARCHAR(191) NOT NULL,
-    `zipCode` VARCHAR(191) NOT NULL,
+    `number` VARCHAR(191) NULL,
+    `complement` VARCHAR(191) NULL,
+    `district` VARCHAR(191) NULL,
+    `city` VARCHAR(191) NULL,
+    `state` VARCHAR(191) NULL,
+    `zipCode` VARCHAR(191) NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `contacts` (
+CREATE TABLE `contact` (
     `id` VARCHAR(191) NOT NULL,
-    `phone` VARCHAR(191) NOT NULL,
-    `whatsapp` VARCHAR(191) NOT NULL,
-    `email` VARCHAR(191) NOT NULL,
-    `facebook` VARCHAR(191) NOT NULL,
-    `instagram` VARCHAR(191) NOT NULL,
+    `phone` VARCHAR(191) NULL,
+    `whatsapp` VARCHAR(191) NULL,
+    `email` VARCHAR(191) NULL,
+    `facebook` VARCHAR(191) NULL,
+    `instagram` VARCHAR(191) NULL,
+    `created_at` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
 
-    UNIQUE INDEX `contacts_phone_key`(`phone`),
-    UNIQUE INDEX `contacts_email_key`(`email`),
-    UNIQUE INDEX `contacts_facebook_key`(`facebook`),
-    UNIQUE INDEX `contacts_instagram_key`(`instagram`),
+    UNIQUE INDEX `contact_phone_key`(`phone`),
+    UNIQUE INDEX `contact_whatsapp_key`(`whatsapp`),
+    UNIQUE INDEX `contact_email_key`(`email`),
+    UNIQUE INDEX `contact_facebook_key`(`facebook`),
+    UNIQUE INDEX `contact_instagram_key`(`instagram`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -32,6 +38,8 @@ CREATE TABLE `register_documents` (
     `id` VARCHAR(191) NOT NULL,
     `cpf` VARCHAR(191) NOT NULL,
     `rg` VARCHAR(191) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `register_documents_cpf_key`(`cpf`),
     UNIQUE INDEX `register_documents_rg_key`(`rg`),
@@ -59,10 +67,10 @@ CREATE TABLE `users` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `users` ADD CONSTRAINT `users_addressId_fkey` FOREIGN KEY (`addressId`) REFERENCES `addresses`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `users` ADD CONSTRAINT `users_addressId_fkey` FOREIGN KEY (`addressId`) REFERENCES `address`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `users` ADD CONSTRAINT `users_contactId_fkey` FOREIGN KEY (`contactId`) REFERENCES `contacts`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `users` ADD CONSTRAINT `users_contactId_fkey` FOREIGN KEY (`contactId`) REFERENCES `contact`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `users` ADD CONSTRAINT `users_registerDocumentId_fkey` FOREIGN KEY (`registerDocumentId`) REFERENCES `register_documents`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

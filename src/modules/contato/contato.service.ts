@@ -3,66 +3,36 @@ import { CreateContatoDto } from './dto/create-contato.dto';
 import { UpdateContatoDto } from './dto/update-contato.dto';
 import { Contato } from './entities/contato.entity';
 import { PrismaService } from '../../config/database/prisma.service';
+import { BaseService } from '../base/base.service';
 
 @Injectable()
 export class ContatoService {
-  constructor(private readonly prisma: PrismaService) {}
+  private readonly baseService: BaseService<Contato, CreateContatoDto, UpdateContatoDto>;
+
+  constructor(readonly prisma: PrismaService) {
+    this.baseService = new BaseService<Contato, CreateContatoDto, UpdateContatoDto>(prisma, 'contact');
+  }
   async create(createContatoDto: CreateContatoDto): Promise<CreateContatoDto> {
-    const contact: Contato = await this.prisma.contact.create({
-      data: createContatoDto,
-    });
-
-    return contact;
+    return await this.baseService.create(createContatoDto);
   }
 
-  async findAll(): Promise<Contato[]> {
-    const contacts: Contato[] = await this.prisma.contact.findMany();
-
-    return contacts;
+  async find_many(): Promise<Contato[]> {
+    return await this.baseService.find_many();
   }
 
-  async findOne(id: string): Promise<Contato> {
-    const contact: Contato = await this.prisma.contact.findUnique({
-      where: { id: id },
-    });
-
-    return contact;
+  async find_unique(id: string): Promise<Contato> {
+    return await this.baseService.find_unique(id);
   }
 
-  async update(id: string, updateContatoDto: UpdateContatoDto): Promise<Contato> {
-    const contact_exists: Contato = await this.exists(id);
-
-    if (!contact_exists) {
-      return null;
-    }
-
-    const contact: Contato = await this.prisma.contact.update({
-      where: { id: contact_exists.id },
-      data: updateContatoDto,
-    });
-
-    return contact;
+  async edit(id: string, updateContatoDto: UpdateContatoDto): Promise<Contato> {
+    return await this.baseService.edit(id, updateContatoDto);
   }
 
   async remove(id: string): Promise<Boolean> {
-    const contact_exists: Contato = await this.exists(id);
-
-    const contact_removed: Contato = await this.prisma.contact.delete({ where: { id: contact_exists.id } });
-
-    return contact_removed ? true : false;
+    return await this.baseService.remove(id);
   }
 
   async exists(id: string): Promise<Contato> {
-    const contact_exists: Contato = await this.prisma.contact.findUnique({
-      where: {
-        id: id,
-      },
-    });
-
-    if (!contact_exists) {
-      return null;
-    }
-
-    return contact_exists;
+    return await this.baseService.exists(id);
   }
 }
