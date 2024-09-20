@@ -20,7 +20,15 @@
     "noFallthroughCasesInSwitch": false,
     "strict": true,
     "paths": {
-      "src/*": ["src/*"]
+      "@src/*": ["src/*"],
+      "@enums/*": ["src/enums/*"],
+      "@tests/*": ["src/tests/*"],
+      "@modules/*": ["src/modules/*"],
+      "@base/*": ["src/modules/base/*"],
+      "@address/*": ["src/modules/address/*"],
+      "@contact/*": ["src/modules/contact/*"],
+      "@user/*": ["src/modules/user/*"],
+      "@prismaService/*": ["src/config/database/*"]
     }
   }
 }

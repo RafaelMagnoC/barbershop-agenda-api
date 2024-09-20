@@ -1,16 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsBoolean,
-  IsDate,
-  IsEnum,
-  IsOptional,
-  IsString,
-  Matches,
-  ValidateIf,
-} from 'class-validator';
-import { Genero } from '../../../enums/genero';
-import { CreateContatoDto } from '../../contato/dto/create-contato.dto';
-import { CreateEnderecoDto } from '../../endereco/dto/create-endereco.dto';
+import { IsBoolean, IsDate, IsEnum, IsOptional, IsString, Matches, ValidateIf } from 'class-validator';
+import { Genero } from '@enums/genero';
+import { CreateContatoDto } from '@contact/dto/create-contato.dto';
+import { CreateAddressDto } from '@address/dto/create-address.dto';
 
 export class CreateUsuarioDto {
   @ApiProperty({
@@ -63,7 +55,7 @@ export class CreateUsuarioDto {
 
   @ApiProperty({
     description: 'Endereço do usuário',
-    type: CreateEnderecoDto,
+    type: CreateAddressDto,
   })
-  endereco: CreateEnderecoDto;
+  endereco: CreateAddressDto;
 }

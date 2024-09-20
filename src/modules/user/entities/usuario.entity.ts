@@ -1,15 +1,7 @@
-import {
-  IsBoolean,
-  IsDate,
-  IsEnum,
-  IsOptional,
-  IsString,
-  Matches,
-  ValidateIf,
-} from 'class-validator';
-import { Genero } from 'src/enums/genero';
-import { Contato } from 'src/modules/contato/entities/contato.entity';
-import { Endereco } from 'src/modules/endereco/entities/endereco.entity';
+import { IsBoolean, IsDate, IsEnum, IsOptional, IsString, Matches, ValidateIf } from 'class-validator';
+import { Genero } from '@enums/genero';
+import { Contato } from '@contact/entities/contato.entity';
+import { AddressEntity } from '@address/entities/address.entity';
 export class Usuario {
   id: string;
 
@@ -46,5 +38,5 @@ export class Usuario {
 
   contato: Contato;
 
-  endereco: Endereco;
+  endereco: AddressEntity;
 }

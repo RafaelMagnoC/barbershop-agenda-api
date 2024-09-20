@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { ContatoModule } from './modules/contato/contato.module';
-import { EnderecoModule } from './modules/endereco/endereco.module';
-import { UsuarioModule } from './modules/usuario/usuario.module';
+import { ContatoModule } from '@contact/contato.module';
+import { AddressModule } from '@address/address.module';
+import { UsuarioModule } from '@user/usuario.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -14,7 +14,7 @@ import { UsuarioModule } from './modules/usuario/usuario.module';
     }),
     UsuarioModule,
     ContatoModule,
-    EnderecoModule,
+    AddressModule,
   ],
   controllers: [AppController],
   providers: [AppService],

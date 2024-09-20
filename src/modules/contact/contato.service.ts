@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CreateContatoDto } from './dto/create-contato.dto';
 import { UpdateContatoDto } from './dto/update-contato.dto';
 import { Contato } from './entities/contato.entity';
-import { PrismaService } from '../../config/database/prisma.service';
-import { BaseService } from '../base/base.service';
+import { PrismaService } from '@prismaService/prisma.service';
+import { BaseService } from '@base/base.service';
 
 @Injectable()
 export class ContatoService {
