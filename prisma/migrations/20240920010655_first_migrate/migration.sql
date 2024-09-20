@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE `address` (
     `id` VARCHAR(191) NOT NULL,
-    `street` VARCHAR(191) NOT NULL,
+    `street` VARCHAR(191) NULL,
     `number` VARCHAR(191) NULL,
     `complement` VARCHAR(191) NULL,
     `district` VARCHAR(191) NULL,
@@ -9,7 +9,7 @@ CREATE TABLE `address` (
     `state` VARCHAR(191) NULL,
     `zipCode` VARCHAR(191) NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updated_at` DATETIME(3) NOT NULL,
+    `updated_at` DATETIME(3) NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
