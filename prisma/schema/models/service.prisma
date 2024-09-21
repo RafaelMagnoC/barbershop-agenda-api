@@ -1,0 +1,14 @@
+model Service {
+    id          String    @id @default(uuid())
+    name        String    @unique
+    description String?
+    cost        Float?
+    time        Int?
+    comission   Float?
+    is_active   Boolean   @default(true)
+    created_at  DateTime  @default(now())
+    updated_at  DateTime?
+
+    //map
+    @@map("service")
+}

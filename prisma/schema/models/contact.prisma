@@ -1,17 +1,16 @@
 model Contact {
-  id              String             @id @default(uuid())
-  phone     String? @unique
-  whatsapp String? @unique
-  email     String? @unique
-  facebook String? @unique
-  instagram String? @unique
+  id         String    @id @default(uuid())
+  phone      String?   @unique
+  whatsapp   String?   @unique
+  email      String?   @unique
+  facebook   String?   @unique
+  instagram  String?   @unique
   created_at DateTime? @default(now())
-  updated_at DateTime? 
-
+  updated_at DateTime?
 
   //relations
-  user      User?  @relation
-  enterprise      Enterprise?  @relation
+  user       User?       @relation
+  enterprise Enterprise? @relation
 
   //maps
   @@map("contact") // Optional: Maps the model to a different table name

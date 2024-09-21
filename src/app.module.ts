@@ -10,6 +10,7 @@ import { ClubModule } from './modules/club/club.module';
 import { ServicesModule } from './modules/services/services.module';
 import { GalleryModule } from './modules/gallery/gallery.module';
 import { CategoryModule } from './modules/category/category.module';
+import { PaymentModule } from './modules/payment/payment.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -25,6 +26,7 @@ import { CategoryModule } from './modules/category/category.module';
     ServicesModule,
     GalleryModule,
     CategoryModule,
+    PaymentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

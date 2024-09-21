@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { GalleryService } from './gallery.service';
 import { CreateGalleryDto } from './dto/create-gallery.dto';
 import { UpdateGalleryDto } from './dto/update-gallery.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('gallery')
 @Controller('gallery')
 export class GalleryController {
   constructor(private readonly galleryService: GalleryService) {}

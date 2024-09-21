@@ -1,19 +1,19 @@
 model Enterprise {
-  id              String             @id @default(uuid())
-  name            String
+  id            String    @id @default(uuid())
+  name          String
   social_reason String
-  cnpj String @unique
-  logo String?
-  is_active Boolean
-  created_at DateTime @default(now())
-  updated_at DateTime? 
+  cnpj          String    @unique
+  logo          String?
+  is_active     Boolean
+  created_at    DateTime  @default(now())
+  updated_at    DateTime?
 
   //relations
-  address         Address?        @relation(fields: [address_id], references: [id])
-  address_id       String? @unique
-  contact         Contact?        @relation(fields: [contact_id], references: [id])
-  contact_id       String? @unique
-  
+  address    Address? @relation(fields: [address_id], references: [id])
+  address_id String?  @unique
+  contact    Contact? @relation(fields: [contact_id], references: [id])
+  contact_id String?  @unique
+
   //map
   @@map("enterprise")
 }

@@ -1,12 +1,12 @@
 model Document {
-  id              String             @id @default(uuid())
-  cpf  String? @unique
-  rg String? @unique
+  id         String   @id @default(uuid())
+  cpf        String?  @unique
+  rg         String?  @unique
   created_at DateTime @default(now())
   updated_at DateTime
 
   //relations 
-  user     User?  @relation
+  user User? @relation
 
   //maps
   @@map("document")
