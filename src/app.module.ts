@@ -6,6 +6,10 @@ import { ContactModule } from '@contact/contact.module';
 import { AddressModule } from '@address/address.module';
 import { UserModule } from '@user/user.module';
 import { EnterpriseModule } from '@enterprise/enterprise.module';
+import { ClubModule } from './modules/club/club.module';
+import { ServicesModule } from './modules/services/services.module';
+import { GalleryModule } from './modules/gallery/gallery.module';
+import { CategoryModule } from './modules/category/category.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -17,6 +21,10 @@ import { EnterpriseModule } from '@enterprise/enterprise.module';
     ContactModule,
     AddressModule,
     EnterpriseModule,
+    ClubModule,
+    ServicesModule,
+    GalleryModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
