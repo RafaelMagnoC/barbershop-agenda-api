@@ -1,39 +1,26 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiParam,
-  ApiBody,
-} from '@nestjs/swagger';
-import { UsuarioService } from './usuario.service';
-import { CreateUsuarioDto } from './dto/create-usuario.dto';
-import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
+import { UserService } from './user.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { UserEntity } from './entities/user.entity';
 
-@ApiTags('usuario')
-@Controller('usuario')
-export class UsuarioController {
-  constructor(private readonly usuarioService: UsuarioService) {}
+@ApiTags('user')
+@Controller('user')
+export class UserController {
+  constructor(private readonly userService: UserService) {}
 
   @Post()
   @ApiOperation({ summary: 'Cria um novo usuário' })
-  @ApiBody({ type: CreateUsuarioDto })
+  @ApiBody({ type: CreateUserDto })
   @ApiResponse({
     status: 201,
     description: 'Usuário criado com sucesso',
-    type: CreateUsuarioDto,
+    type: CreateUserDto,
   })
   @ApiResponse({ status: 400, description: 'Bad request' })
-  create(@Body() createUsuarioDto: CreateUsuarioDto) {
-    return this.usuarioService.create(createUsuarioDto);
+  async create(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
+    return await this.userService.create(createUserDto);
   }
 
   @Get()
@@ -41,11 +28,11 @@ export class UsuarioController {
   @ApiResponse({
     status: 200,
     description: 'Lista de usuários',
-    type: [CreateUsuarioDto],
+    type: [UserEntity],
   })
   @ApiResponse({ status: 404, description: 'Usuários não encontrados' })
-  findAll() {
-    return this.usuarioService.findAll();
+  async find_many(): Promise<UserEntity[]> {
+    return await this.userService.find_many();
   }
 
   @Get(':id')
@@ -54,26 +41,26 @@ export class UsuarioController {
   @ApiResponse({
     status: 200,
     description: 'Usuário encontrado',
-    type: CreateUsuarioDto,
+    type: UserEntity,
   })
   @ApiResponse({ status: 404, description: 'Usuario não encontrado' })
-  findOne(@Param('id') id: string) {
-    return this.usuarioService.findOne(+id);
+  async find_unique(@Param('id') id: string): Promise<UserEntity> {
+    return await this.userService.find_unique(id);
   }
 
   @Patch(':id')
   @ApiOperation({ summary: 'Atualiza um usuário pelo ID' })
   @ApiParam({ name: 'id', type: String, description: 'Usuário ID' })
-  @ApiBody({ type: () => UpdateUsuarioDto })
+  @ApiBody({ type: () => UpdateUserDto })
   @ApiResponse({
     status: 200,
     description: 'Usuário atualizado com sucesso',
-    type: UpdateUsuarioDto,
+    type: UserEntity,
   })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
-  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
-    return this.usuarioService.update(+id, updateUsuarioDto);
+  async edit(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<UserEntity> {
+    return await this.userService.edit(id, updateUserDto);
   }
 
   @Delete(':id')
@@ -84,7 +71,7 @@ export class UsuarioController {
     description: 'Usuário excluído com sucesso',
   })
   @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
-  remove(@Param('id') id: string) {
-    return this.usuarioService.remove(+id);
+  async remove(@Param('id') id: string): Promise<Boolean> {
+    return await this.userService.remove(id);
   }
 }

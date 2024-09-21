@@ -2,10 +2,10 @@ model User {
   id              String             @id @default(uuid())
   name            String
   birthday DateTime
-  username String @unique
-  isActive Boolean
-  token String? @unique
-    
+  gender              Gender
+  username String? @unique
+  is_active Boolean @default(true)
+  token String? @unique    
 
   //relations
   address         Address?        @relation(fields: [addressId], references: [id])
@@ -14,8 +14,7 @@ model User {
   contactId       String? @unique
   registerDocument RegisterDocument? @relation(fields: [registerDocumentId], references: [id])
   registerDocumentId String? @unique
-
   
   //map
-  @@map("users")
+  @@map("user")
 }

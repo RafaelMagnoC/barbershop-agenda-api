@@ -6,7 +6,11 @@ export class BaseService<Entity, CreateDTO, UpdateDTO> {
   constructor(
     private readonly prisma: PrismaService,
     private readonly model: string
-  ) {}
+  ) {
+    if (!model) {
+      throw new Error('O nome do modelo deve ser fornecido.');
+    }
+  }
   async create(createDTO: CreateDTO): Promise<Entity> {
     try {
       const object: Entity = await this.prisma[this.model].create({

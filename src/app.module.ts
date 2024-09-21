@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { ContactModule } from '@contact/contact.module';
 import { AddressModule } from '@address/address.module';
-import { UsuarioModule } from '@user/usuario.module';
+import { UserModule } from '@user/user.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -12,7 +12,7 @@ import { UsuarioModule } from '@user/usuario.module';
       cache: true,
       expandVariables: true,
     }),
-    UsuarioModule,
+    UserModule,
     ContactModule,
     AddressModule,
   ],
