@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { ContatoModule } from '@contact/contato.module';
+import { ContactModule } from '@contact/contact.module';
 import { AddressModule } from '@address/address.module';
 import { UsuarioModule } from '@user/usuario.module';
 @Module({
@@ -13,7 +13,7 @@ import { UsuarioModule } from '@user/usuario.module';
       expandVariables: true,
     }),
     UsuarioModule,
-    ContatoModule,
+    ContactModule,
     AddressModule,
   ],
   controllers: [AppController],

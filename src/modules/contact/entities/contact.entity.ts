@@ -1,13 +1,6 @@
-import {
-  IsDate,
-  IsEmail,
-  IsOptional,
-  IsString,
-  IsUrl,
-  Length,
-} from 'class-validator';
+import { IsDate, IsEmail, IsOptional, IsString, IsUrl, Length } from 'class-validator';
 
-export class Contato {
+export class ContactEntity {
   id: string;
 
   @IsOptional()

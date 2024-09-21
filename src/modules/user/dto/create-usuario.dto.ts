@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsDate, IsEnum, IsOptional, IsString, Matches, ValidateIf } from 'class-validator';
 import { Genero } from '@enums/genero';
-import { CreateContatoDto } from '@contact/dto/create-contato.dto';
+import { CreateContactDto } from '@contact/dto/create-contact.dto';
 import { CreateAddressDto } from '@address/dto/create-address.dto';
 
 export class CreateUsuarioDto {
@@ -49,9 +49,9 @@ export class CreateUsuarioDto {
 
   @ApiProperty({
     description: 'Contato do usuário',
-    type: CreateContatoDto,
+    type: CreateContactDto,
   })
-  contato: CreateContatoDto;
+  contato: CreateContactDto;
 
   @ApiProperty({
     description: 'Endereço do usuário',
