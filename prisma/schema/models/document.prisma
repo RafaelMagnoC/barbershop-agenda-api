@@ -1,4 +1,4 @@
-model RegisterDocument {
+model Document {
   id              String             @id @default(uuid())
   cpf  String? @unique
   rg String? @unique
@@ -9,5 +9,5 @@ model RegisterDocument {
   user     User?  @relation
 
   //maps
-  @@map("register_documents")
+  @@map("document")
 }

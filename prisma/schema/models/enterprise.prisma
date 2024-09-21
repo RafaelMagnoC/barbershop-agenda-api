@@ -1,22 +1,19 @@
-model User {
+model Enterprise {
   id              String             @id @default(uuid())
   name            String
-  birthday DateTime
-  gender              Gender
-  username String? @unique
-  is_active Boolean @default(true)
-  token String? @unique
+  social_reason String
+  cnpj String @unique
+  logo String?
+  is_active Boolean
   created_at DateTime @default(now())
-  updated_at DateTime?     
+  updated_at DateTime? 
 
   //relations
   address         Address?        @relation(fields: [address_id], references: [id])
   address_id       String? @unique
   contact         Contact?        @relation(fields: [contact_id], references: [id])
   contact_id       String? @unique
-  document Document? @relation(fields: [document_id], references: [id])
-  document_id String? @unique
   
   //map
-  @@map("user")
+  @@map("enterprise")
 }

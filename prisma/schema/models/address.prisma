@@ -12,6 +12,7 @@ model Address {
 
   //relations
   user     User?  @relation
+  enterprise      Enterprise?  @relation
 
   //maps
   @@map("address")

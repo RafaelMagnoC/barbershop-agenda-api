@@ -11,6 +11,7 @@ model Contact {
 
   //relations
   user      User?  @relation
+  enterprise      Enterprise?  @relation
 
   //maps
   @@map("contact") // Optional: Maps the model to a different table name

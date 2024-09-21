@@ -28,6 +28,7 @@
       "@address/*": ["src/modules/address/*"],
       "@contact/*": ["src/modules/contact/*"],
       "@user/*": ["src/modules/user/*"],
+      "@enterprise/*": ["src/modules/enterprise/*"],
       "@prismaService/*": ["src/config/database/*"]
     }
   }

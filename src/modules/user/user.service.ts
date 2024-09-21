@@ -4,14 +4,12 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { BaseService } from '@base/base.service';
 import { UserEntity } from './entities/user.entity';
 import { PrismaService } from '@prismaService/prisma.service';
-import { CreateAddressDto } from '../address/dto/create-address.dto';
-import { CreateContactDto } from '../contact/dto/create-contact.dto';
 
 @Injectable()
 export class UserService {
   private readonly baseService: BaseService<UserEntity, CreateUserDto, UpdateUserDto>;
 
-  constructor(private readonly prisma: PrismaService) {
+  constructor(readonly prisma: PrismaService) {
     this.baseService = new BaseService<UserEntity, CreateUserDto, UpdateUserDto>(prisma, 'user');
   }
 

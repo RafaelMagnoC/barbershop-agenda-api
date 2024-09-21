@@ -1,4 +1,4 @@
-import { IsBoolean, IsDate, IsEnum, IsOptional, IsString, Matches, ValidateIf } from 'class-validator';
+import { IsBoolean, IsDate, IsEnum, IsOptional, IsString, ValidateIf } from 'class-validator';
 import { Gender } from '@enums/gender.enum';
 import { ContactEntity } from '@contact/entities/contact.entity';
 import { AddressEntity } from '@address/entities/address.entity';
@@ -38,8 +38,8 @@ export class UserEntity {
   //relations:
 
   contact?: ContactEntity;
-  contactId?: string;
+  contact_id?: string;
 
   address?: AddressEntity;
-  addressId?: string;
+  address_id?: string;
 }

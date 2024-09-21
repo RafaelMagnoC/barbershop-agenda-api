@@ -85,6 +85,7 @@
       "^@address/(.*)$": "<rootDir>/src/modules/address/$1",
       "^@contact/(.*)$": "<rootDir>/src/modules/contact/$1",
       "^@user/(.*)$": "<rootDir>/src/modules/user/$1",
+      "^@enterprise/(.*)$": "<rootDir>/src/modules/enterprise/$1",
       "^@prismaService/(.*)$": "<rootDir>/src/config/database/$1"
     }
   }
