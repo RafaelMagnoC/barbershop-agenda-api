@@ -11,6 +11,7 @@ import { ServiceModule } from '@service/service.module';
 import { GalleryModule } from '@gallery/gallery.module';
 import { CategoryModule } from '@category/category.module';
 import { PaymentModule } from '@payment/payment.module';
+import { AdministratorModule } from '@administrator/administrator.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -27,6 +28,7 @@ import { PaymentModule } from '@payment/payment.module';
     GalleryModule,
     CategoryModule,
     PaymentModule,
+    AdministratorModule,
   ],
   controllers: [AppController],
   providers: [AppService],

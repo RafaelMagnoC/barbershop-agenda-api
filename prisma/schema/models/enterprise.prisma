@@ -8,11 +8,13 @@ model Enterprise {
   created_at    DateTime  @default(now())
   updated_at    DateTime?
 
-  //relations
+  //relations the of data
   address    Address? @relation(fields: [address_id], references: [id])
   address_id String?  @unique
   contact    Contact? @relation(fields: [contact_id], references: [id])
   contact_id String?  @unique
+
+  users UserEnterprise[]
 
   //map
   @@map("enterprise")

@@ -92,7 +92,8 @@
       "^@document/(.*)$": "<rootDir>/src/modules/document/$1",
       "^@gallery/(.*)$": "<rootDir>/src/modules/gallery/$1",
       "^@payment/(.*)$": "<rootDir>/src/modules/payment/$1",
-      "^@service/(.*)$": "<rootDir>/src/modules/service/$1"
+      "^@service/(.*)$": "<rootDir>/src/modules/service/$1",
+      "^@administrator/(.*)$": "<rootDir>/src/modules/administrator/$1"
     }
   }
 }

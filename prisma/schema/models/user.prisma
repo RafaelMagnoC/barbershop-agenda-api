@@ -9,7 +9,7 @@ model User {
   created_at DateTime  @default(now())
   updated_at DateTime?
 
-  //relations
+  // relations
   address     Address?  @relation(fields: [address_id], references: [id])
   address_id  String?   @unique
   contact     Contact?  @relation(fields: [contact_id], references: [id])
@@ -17,6 +17,15 @@ model User {
   document    Document? @relation(fields: [document_id], references: [id])
   document_id String?   @unique
 
-  //map
+  // relations user rules
+  administrator Administrator? @relation
+  receptionist  Receptionist?  @relation
+  develop       Develop?       @relation
+  attendant     Attendant?     @relation
+  client        Client?        @relation
+
+  // relation with enterprise
+  enterprises UserEnterprise[]
+
   @@map("user")
 }

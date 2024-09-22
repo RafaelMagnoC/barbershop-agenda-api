@@ -35,6 +35,7 @@
       "@document/*": ["src/modules/document/*"],
       "@user/*": ["src/modules/user/*"],
       "@enterprise/*": ["src/modules/enterprise/*"],
+      "@administrator/*": ["src/modules/administrator/*"],
       "@prismaService/*": ["src/config/database/*"]
     }
   }

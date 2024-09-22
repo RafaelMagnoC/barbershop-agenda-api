@@ -28,7 +28,7 @@ export class CreateUserDto {
   })
   @IsOptional()
   @IsEnum(Gender, { message: 'Escolha uma opção da lista de gêneros' })
-  gender?: Gender;
+  gender: Gender;
 
   @ApiProperty({
     description: 'username',

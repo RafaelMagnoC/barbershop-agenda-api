@@ -8,7 +8,7 @@ export class CreateAddressDto {
   })
   @IsString({ message: 'O logradouro deve ser uma string' })
   @Length(1, 255, { message: 'O logradouro deve ter entre 1 e 255 caracteres' })
-  street: string;
+  street?: string;
 
   @ApiProperty({
     description: 'O número do endereço',
@@ -16,7 +16,7 @@ export class CreateAddressDto {
   })
   @IsString({ message: 'O número deve ser uma string' })
   @Length(1, 5, { message: 'O número deve ter entre 1 e 5 caracteres' })
-  number: string;
+  number?: string;
 
   @ApiProperty({
     description: 'O complemento do endereço',
@@ -28,7 +28,7 @@ export class CreateAddressDto {
     message: 'O complemento deve ter no máximo 50 caracteres',
   })
   @IsOptional()
-  complement: string;
+  complement?: string;
 
   @ApiProperty({
     description: 'O bairro do endereço',
@@ -36,7 +36,7 @@ export class CreateAddressDto {
   })
   @IsString({ message: 'O bairro deve ser uma string' })
   @Length(1, 30, { message: 'O bairro deve ter entre 1 e 30 caracteres' })
-  district: string;
+  district?: string;
 
   @ApiProperty({
     description: 'A cidade do endereço',
@@ -44,7 +44,7 @@ export class CreateAddressDto {
   })
   @IsString({ message: 'A cidade deve ser uma string' })
   @Length(1, 100, { message: 'A cidade deve ter entre 1 e 100 caracteres' })
-  city: string;
+  city?: string;
 
   @ApiProperty({
     description: 'A UF do endereço',
@@ -55,7 +55,7 @@ export class CreateAddressDto {
   @Matches(/^[A-Z]{2}$/, {
     message: 'A UF deve ser uma sigla de dois caracteres maiúsculos',
   })
-  state: string;
+  state?: string;
 
   @ApiProperty({
     description: 'O CEP do endereço',
@@ -65,5 +65,5 @@ export class CreateAddressDto {
   @Matches(/^\d{5}-\d{3}$/, {
     message: 'O CEP deve estar no formato XXXXX-XXX',
   })
-  zipCode: string;
+  zipCode?: string;
 }
