@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { CategoryEntity } from './entities/category.entity';
+import { BaseService } from '@base/base.service';
+import { PrismaService } from '@src/config/database/prisma.service';
 
 @Injectable()
 export class CategoryService {
-  create(createCategoryDto: CreateCategoryDto) {
-    return 'This action adds a new category';
+  private readonly baseService: BaseService<CategoryEntity, CreateCategoryDto, UpdateCategoryDto>;
+
+  constructor(readonly prisma: PrismaService) {
+    this.baseService = new BaseService<CategoryEntity, CreateCategoryDto, UpdateCategoryDto>(prisma, 'category');
+  }
+  async create(createCategoryDto: CreateCategoryDto): Promise<CategoryEntity> {
+    return await this.baseService.create(createCategoryDto);
   }
 
-  findAll() {
-    return `This action returns all category`;
+  async find_many(): Promise<CategoryEntity[]> {
+    return await this.baseService.find_many();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} category`;
+  async find_unique(id: string): Promise<CategoryEntity> {
+    return await this.baseService.find_unique(id);
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  async edit(id: string, updateCategoryDto: UpdateCategoryDto): Promise<CategoryEntity> {
+    return await this.baseService.edit(id, updateCategoryDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async remove(id: string): Promise<Boolean> {
+    return await this.baseService.remove(id);
   }
 }

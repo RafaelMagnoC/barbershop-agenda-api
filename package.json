@@ -86,7 +86,13 @@
       "^@contact/(.*)$": "<rootDir>/src/modules/contact/$1",
       "^@user/(.*)$": "<rootDir>/src/modules/user/$1",
       "^@enterprise/(.*)$": "<rootDir>/src/modules/enterprise/$1",
-      "^@prismaService/(.*)$": "<rootDir>/src/config/database/$1"
+      "^@prismaService/(.*)$": "<rootDir>/src/config/database/$1",
+      "^@category/(.*)$": "<rootDir>/src/modules/category/$1",
+      "^@club/(.*)$": "<rootDir>/src/modules/club/$1",
+      "^@document/(.*)$": "<rootDir>/src/modules/document/$1",
+      "^@gallery/(.*)$": "<rootDir>/src/modules/gallery/$1",
+      "^@payment/(.*)$": "<rootDir>/src/modules/payment/$1",
+      "^@service/(.*)$": "<rootDir>/src/modules/service/$1"
     }
   }
 }

@@ -4,7 +4,7 @@ export class ServiceEntity {
   description?: string;
   cost?: number;
   time?: number;
-  commission?: number;
+  comission?: number;
   is_active: boolean;
   created_at: Date;
   updated_at?: Date;

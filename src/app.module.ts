@@ -6,11 +6,11 @@ import { ContactModule } from '@contact/contact.module';
 import { AddressModule } from '@address/address.module';
 import { UserModule } from '@user/user.module';
 import { EnterpriseModule } from '@enterprise/enterprise.module';
-import { ClubModule } from './modules/club/club.module';
-import { ServicesModule } from './modules/services/services.module';
-import { GalleryModule } from './modules/gallery/gallery.module';
-import { CategoryModule } from './modules/category/category.module';
-import { PaymentModule } from './modules/payment/payment.module';
+import { ClubModule } from '@club/club.module';
+import { ServiceModule } from '@service/service.module';
+import { GalleryModule } from '@gallery/gallery.module';
+import { CategoryModule } from '@category/category.module';
+import { PaymentModule } from '@payment/payment.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -23,7 +23,7 @@ import { PaymentModule } from './modules/payment/payment.module';
     AddressModule,
     EnterpriseModule,
     ClubModule,
-    ServicesModule,
+    ServiceModule,
     GalleryModule,
     CategoryModule,
     PaymentModule,
