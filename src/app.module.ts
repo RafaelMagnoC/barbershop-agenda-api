@@ -12,6 +12,7 @@ import { GalleryModule } from '@gallery/gallery.module';
 import { CategoryModule } from '@category/category.module';
 import { PaymentModule } from '@payment/payment.module';
 import { AdministratorModule } from '@administrator/administrator.module';
+import { DocumentModule } from './modules/document/document.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -29,6 +30,7 @@ import { AdministratorModule } from '@administrator/administrator.module';
     CategoryModule,
     PaymentModule,
     AdministratorModule,
+    DocumentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -4,6 +4,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/user.entity';
+import { instanceToPlain, plainToInstance } from 'class-transformer';
 
 @ApiTags('user')
 @Controller('user')
@@ -32,7 +33,8 @@ export class UserController {
   })
   @ApiResponse({ status: 404, description: 'Usuários não encontrados' })
   async find_many(): Promise<UserEntity[]> {
-    return await this.userService.find_many();
+    const users: UserEntity[] = await this.userService.find_many();
+    return plainToInstance(UserEntity, users);
   }
 
   @Get(':id')
