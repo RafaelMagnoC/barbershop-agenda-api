@@ -2,10 +2,8 @@ export class ClubEntity {
   id: string;
   name: string;
   description: string;
-  cost: number;
+  price: number;
+  is_active: boolean;
   created_at: Date;
   updated_at: Date;
-
-  //
-  client_id: string;
 }

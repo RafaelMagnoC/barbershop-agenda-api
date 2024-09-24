@@ -1,17 +1,14 @@
-model Service {
+model Club {
     id          String    @id @default(uuid())
     name        String    @unique
     description String?
     price       Float?
-    time        Int?
-    comission   Float?
     is_active   Boolean   @default(true)
     created_at  DateTime  @default(now())
     updated_at  DateTime?
 
     // relations
-    club ClubService[]
+    service ClubService[]
 
-    //map
-    @@map("service")
+    @@map("club")
 }

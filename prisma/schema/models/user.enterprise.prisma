@@ -1,9 +1,10 @@
 model UserEnterprise {
-    userId       String
-    enterpriseId String
+    user_id       String
+    enterprise_id String
 
-    user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-    enterprise Enterprise @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+    user       User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    enterprise Enterprise @relation(fields: [enterprise_id], references: [id], onDelete: Cascade)
 
-    @@id([userId, enterpriseId]) // chave primária composta
+    @@id([user_id, enterprise_id])
+    @@map("x_user_x_enterprise")
 }

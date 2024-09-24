@@ -2,7 +2,7 @@ export class ServiceEntity {
   id: string;
   name: string;
   description?: string;
-  cost?: number;
+  price?: number;
   time?: number;
   comission?: number;
   is_active: boolean;

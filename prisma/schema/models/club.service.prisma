@@ -1,0 +1,10 @@
+model ClubService {
+    service_id String
+    club_id    String
+
+    service Service @relation(fields: [service_id], references: [id], onDelete: Cascade)
+    club    Club    @relation(fields: [club_id], references: [id], onDelete: Cascade)
+
+    @@id([service_id, club_id])
+    @@map("x_club_x_service")
+}

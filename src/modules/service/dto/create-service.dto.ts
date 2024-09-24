@@ -21,7 +21,7 @@ export class CreateServiceDto {
     example: 45.0,
   })
   @IsNumber()
-  cost?: number;
+  price?: number;
 
   @ApiProperty({
     description: 'tempo médio que dura o serviço em minutos',

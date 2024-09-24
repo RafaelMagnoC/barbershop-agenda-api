@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { CreateClubDto } from './dto/create-club.dto';
 import { UpdateClubDto } from './dto/update-club.dto';
+import { PrismaService } from '@prismaService/prisma.service';
+import { ClubEntity } from './entities/club.entity';
+import { BaseService } from '@base/base.service';
 
 @Injectable()
 export class ClubService {
-  create(createClubDto: CreateClubDto) {
-    return 'This action adds a new club';
+  private readonly baseService: BaseService<ClubEntity, CreateClubDto, UpdateClubDto>;
+
+  constructor(readonly prisma: PrismaService) {
+    this.baseService = new BaseService<ClubEntity, CreateClubDto, UpdateClubDto>(prisma, 'club');
+  }
+  async create(createClubDto: CreateClubDto): Promise<ClubEntity> {
+    return await this.baseService.create(createClubDto);
   }
 
-  findAll() {
-    return `This action returns all club`;
+  async find_many(): Promise<ClubEntity[]> {
+    return await this.baseService.find_many();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} club`;
+  async find_unique(id: string): Promise<ClubEntity> {
+    return await this.baseService.find_unique(id);
   }
 
-  update(id: number, updateClubDto: UpdateClubDto) {
-    return `This action updates a #${id} club`;
+  async edit(id: string, updateClubDto: UpdateClubDto): Promise<ClubEntity> {
+    return await this.baseService.edit(id, updateClubDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} club`;
+  async remove(id: string): Promise<Boolean> {
+    return await this.baseService.remove(id);
   }
 }
