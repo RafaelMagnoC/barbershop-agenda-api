@@ -33,7 +33,7 @@ export class BaseService<Entity, CreateDTO, UpdateDTO> {
     }
   }
 
-  async find_unique(id: string): Promise<Entity> {
+  async find_unique(id: string | number): Promise<Entity> {
     try {
       const object: Entity = await this.prisma[this.model].findUnique({
         where: { id: id },
@@ -45,7 +45,7 @@ export class BaseService<Entity, CreateDTO, UpdateDTO> {
     }
   }
 
-  async edit(id: string, updateDTO: UpdateDTO): Promise<Entity> {
+  async edit(id: string | number, updateDTO: UpdateDTO): Promise<Entity> {
     try {
       const object_exists: Entity = await this.exists(id);
 
@@ -64,7 +64,7 @@ export class BaseService<Entity, CreateDTO, UpdateDTO> {
     }
   }
 
-  async remove(id: string): Promise<Boolean> {
+  async remove(id: string | number): Promise<Boolean> {
     try {
       const object_exists: Entity = await this.exists(id);
 
@@ -80,7 +80,7 @@ export class BaseService<Entity, CreateDTO, UpdateDTO> {
     }
   }
 
-  async exists(id: string): Promise<Entity> {
+  async exists(id: string | number): Promise<Entity> {
     try {
       const object_exists: Entity = await this.prisma[this.model].findUnique({
         where: {

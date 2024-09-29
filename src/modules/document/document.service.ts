@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
+import { BaseService } from '@base/base.service';
+import { DocumentEntity } from './entities/document.entity';
+import { PrismaService } from '@src/config/database/prisma.service';
 
 @Injectable()
 export class DocumentService {
-  create(createDocumentDto: CreateDocumentDto) {
-    return 'This action adds a new document';
+  private readonly baseService: BaseService<DocumentEntity, CreateDocumentDto, UpdateDocumentDto>;
+
+  constructor(readonly prisma: PrismaService) {
+    this.baseService = new BaseService<DocumentEntity, CreateDocumentDto, UpdateDocumentDto>(prisma, 'document');
   }
 
-  findAll() {
-    return `This action returns all document`;
+  async create(createDocumentDto: CreateDocumentDto): Promise<DocumentEntity> {
+    return await this.baseService.create(createDocumentDto);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} document`;
+  async find_many(): Promise<DocumentEntity[]> {
+    return await this.baseService.find_many();
   }
 
-  update(id: number, updateDocumentDto: UpdateDocumentDto) {
-    return `This action updates a #${id} document`;
+  async find_unique(id: string): Promise<DocumentEntity> {
+    return await this.baseService.find_unique(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} document`;
+  async edit(id: string, updateDocumentDto: UpdateDocumentDto): Promise<DocumentEntity> {
+    return await this.baseService.edit(id, updateDocumentDto);
+  }
+
+  async remove(id: string): Promise<Boolean> {
+    return await this.baseService.remove(id);
   }
 }

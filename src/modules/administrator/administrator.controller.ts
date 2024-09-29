@@ -15,10 +15,10 @@ export class AdministratorController {
   @ApiResponse({
     status: 201,
     description: 'Administrador criado com sucesso',
-    type: CreateAdministratorDto,
+    type: AdministratorEntity,
   })
   @Post()
-  async create(@Body() createAdministratorDto: CreateAdministratorDto) {
+  async create(@Body() createAdministratorDto: CreateAdministratorDto): Promise<AdministratorEntity> {
     return this.administratorService.create(createAdministratorDto);
   }
 

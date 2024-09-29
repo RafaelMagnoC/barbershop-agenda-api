@@ -10,19 +10,17 @@ model User {
   updated_at DateTime?
 
   // relations
-  address     Address?  @relation(fields: [address_id], references: [id])
-  address_id  String?   @unique
-  contact     Contact?  @relation(fields: [contact_id], references: [id])
-  contact_id  String?   @unique
-  document    Document? @relation(fields: [document_id], references: [id])
-  document_id String?   @unique
+  address  Address?  @relation
+  contact  Contact?  @relation
+  document Document? @relation
 
   // relations user rules
-  administrator Administrator? @relation
-  receptionist  Receptionist?  @relation
-  develop       Develop?       @relation
-  attendant     Attendant?     @relation
-  client        Client?        @relation
+  administrator    Administrator? @relation(fields: [administrator_id], references: [id], onDelete: Cascade)
+  administrator_id String         @unique
+  receptionist     Receptionist?  @relation
+  develop          Develop?       @relation
+  attendant        Attendant?     @relation
+  client           Client?        @relation
 
   // relation with enterprise
   enterprises UserEnterprise[]

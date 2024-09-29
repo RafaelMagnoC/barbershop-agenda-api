@@ -13,6 +13,10 @@ import { CategoryModule } from '@category/category.module';
 import { PaymentModule } from '@payment/payment.module';
 import { AdministratorModule } from '@administrator/administrator.module';
 import { DocumentModule } from '@document/document.module';
+import { AttendantModule } from './modules/attendant/attendant.module';
+import { DevelopModule } from './modules/develop/develop.module';
+import { ClientModule } from './modules/client/client.module';
+import { ReceptionistModule } from './modules/receptionist/receptionist.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -31,6 +35,10 @@ import { DocumentModule } from '@document/document.module';
     PaymentModule,
     AdministratorModule,
     DocumentModule,
+    AttendantModule,
+    DevelopModule,
+    ClientModule,
+    ReceptionistModule,
   ],
   controllers: [AppController],
   providers: [AppService],

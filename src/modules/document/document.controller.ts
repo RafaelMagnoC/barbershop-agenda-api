@@ -2,33 +2,36 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { DocumentService } from './document.service';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { DocumentEntity } from './entities/document.entity';
 
+@ApiTags('document')
 @Controller('document')
 export class DocumentController {
   constructor(private readonly documentService: DocumentService) {}
 
   @Post()
-  create(@Body() createDocumentDto: CreateDocumentDto) {
-    return this.documentService.create(createDocumentDto);
+  async create(@Body() createDocumentDto: CreateDocumentDto): Promise<DocumentEntity> {
+    return await this.documentService.create(createDocumentDto);
   }
 
   @Get()
-  findAll() {
-    return this.documentService.findAll();
+  async find_many(): Promise<DocumentEntity[]> {
+    return await this.documentService.find_many();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.documentService.findOne(+id);
+  async find_unique(@Param('id') id: string) {
+    return await this.documentService.find_unique(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDocumentDto: UpdateDocumentDto) {
-    return this.documentService.update(+id, updateDocumentDto);
+  async edit(@Param('id') id: string, @Body() updateDocumentDto: UpdateDocumentDto) {
+    return this.documentService.edit(id, updateDocumentDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.documentService.remove(+id);
+    return this.documentService.remove(id);
   }
 }

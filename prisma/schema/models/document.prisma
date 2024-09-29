@@ -1,12 +1,13 @@
 model Document {
-  id         String   @id @default(uuid())
-  cpf        String?  @unique
-  rg         String?  @unique
-  created_at DateTime @default(now())
-  updated_at DateTime
+  id         String    @id @default(uuid())
+  cpf        String?   @unique
+  rg         String?   @unique
+  created_at DateTime  @default(now())
+  updated_at DateTime?
 
   //relations 
-  user User? @relation
+  user    User?   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id String? @unique
 
   //maps
   @@map("document")

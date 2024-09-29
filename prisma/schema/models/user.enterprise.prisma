@@ -5,6 +5,9 @@ model UserEnterprise {
     user       User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
     enterprise Enterprise @relation(fields: [enterprise_id], references: [id], onDelete: Cascade)
 
+    created_at DateTime  @default(now())
+    updated_at DateTime?
+
     @@id([user_id, enterprise_id])
     @@map("x_user_x_enterprise")
 }

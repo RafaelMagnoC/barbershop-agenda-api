@@ -5,6 +5,9 @@ model ClubService {
     service Service @relation(fields: [service_id], references: [id], onDelete: Cascade)
     club    Club    @relation(fields: [club_id], references: [id], onDelete: Cascade)
 
+    created_at DateTime  @default(now())
+    updated_at DateTime?
+
     @@id([service_id, club_id])
     @@map("x_club_x_service")
 }
