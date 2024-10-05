@@ -3,6 +3,7 @@ import { ClientService } from './client.service';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { ClientEntity } from './entities/client.entity';
 
 @ApiTags('client')
 @Controller('client')
@@ -10,27 +11,27 @@ export class ClientController {
   constructor(private readonly clientService: ClientService) {}
 
   @Post()
-  create(@Body() createClientDto: CreateClientDto) {
-    return this.clientService.create(createClientDto);
+  async create(@Body() createClientDto: CreateClientDto): Promise<ClientEntity> {
+    return await this.clientService.create(createClientDto);
   }
 
   @Get()
-  findAll() {
-    return this.clientService.findAll();
+  async find_many(): Promise<ClientEntity[]> {
+    return await this.clientService.find_many();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.clientService.findOne(+id);
+  async find_unique(@Param('id') id: string): Promise<ClientEntity> {
+    return await this.clientService.find_unique(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateClientDto: UpdateClientDto) {
-    return this.clientService.update(+id, updateClientDto);
+  async edit(@Param('id') id: string, @Body() updateClientDto: UpdateClientDto): Promise<ClientEntity> {
+    return await this.clientService.edit(id, updateClientDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.clientService.remove(+id);
+  async remove(@Param('id') id: string): Promise<Boolean> {
+    return await this.clientService.remove(id);
   }
 }

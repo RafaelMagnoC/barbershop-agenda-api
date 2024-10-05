@@ -3,6 +3,7 @@ import { DevelopService } from './develop.service';
 import { CreateDevelopDto } from './dto/create-develop.dto';
 import { UpdateDevelopDto } from './dto/update-develop.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { DevelopEntity } from './entities/develop.entity';
 
 @ApiTags('develop')
 @Controller('develop')
@@ -10,27 +11,27 @@ export class DevelopController {
   constructor(private readonly developService: DevelopService) {}
 
   @Post()
-  create(@Body() createDevelopDto: CreateDevelopDto) {
-    return this.developService.create(createDevelopDto);
+  async create(@Body() createDevelopDto: CreateDevelopDto): Promise<DevelopEntity> {
+    return await this.developService.create(createDevelopDto);
   }
 
   @Get()
-  findAll() {
-    return this.developService.findAll();
+  async find_many(): Promise<DevelopEntity[]> {
+    return await this.developService.find_many();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.developService.findOne(+id);
+  async find_unique(@Param('id') id: string): Promise<DevelopEntity> {
+    return await this.developService.find_unique(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDevelopDto: UpdateDevelopDto) {
-    return this.developService.update(+id, updateDevelopDto);
+  async edit(@Param('id') id: string, @Body() updateDevelopDto: UpdateDevelopDto): Promise<DevelopEntity> {
+    return await this.developService.edit(id, updateDevelopDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.developService.remove(+id);
+  async remove(@Param('id') id: string): Promise<Boolean> {
+    return await this.developService.remove(id);
   }
 }

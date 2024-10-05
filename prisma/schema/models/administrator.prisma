@@ -1,9 +1,9 @@
 model Administrator {
     id         String    @id @default(uuid())
-    user       User?     @relation
-    user_id    String?   @unique
     created_at DateTime  @default(now())
     updated_at DateTime?
+    user_id    String?   @unique
+    user       User?     @relation
 
     @@map("administrator")
 }

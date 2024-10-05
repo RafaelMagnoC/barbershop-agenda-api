@@ -16,11 +16,15 @@ model User {
 
   // relations user rules
   administrator    Administrator? @relation(fields: [administrator_id], references: [id], onDelete: Cascade)
-  administrator_id String         @unique
-  receptionist     Receptionist?  @relation
-  develop          Develop?       @relation
-  attendant        Attendant?     @relation
-  client           Client?        @relation
+  administrator_id String?        @unique
+  receptionist     Receptionist?  @relation(fields: [receptionist_id], references: [id], onDelete: Cascade)
+  receptionist_id  String?        @unique
+  develop          Develop?       @relation(fields: [develop_id], references: [id], onDelete: Cascade)
+  develop_id       String?        @unique
+  attendant        Attendant?     @relation(fields: [attendant_id], references: [id], onDelete: Cascade)
+  attendant_id     String?        @unique
+  client           Client?        @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  client_id        String?        @unique
 
   // relation with enterprise
   enterprises UserEnterprise[]

@@ -26,6 +26,8 @@
       "@modules/*": ["src/modules/*"],
       "@base/*": ["src/modules/base/*"],
       "@address/*": ["src/modules/address/*"],
+      "@attendant/*": ["src/modules/attendant/*"],
+      "@client/*": ["src/modules/client/*"],
       "@contact/*": ["src/modules/contact/*"],
       "@category/*": ["src/modules/category/*"],
       "@gallery/*": ["src/modules/gallery/*"],
@@ -36,6 +38,7 @@
       "@user/*": ["src/modules/user/*"],
       "@enterprise/*": ["src/modules/enterprise/*"],
       "@administrator/*": ["src/modules/administrator/*"],
+      "@receptionist/*": ["src/modules/receptionist/*"],
       "@prismaService/*": ["src/config/database/*"]
     }
   }
