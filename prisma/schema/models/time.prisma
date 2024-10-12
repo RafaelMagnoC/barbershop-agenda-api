@@ -1,0 +1,12 @@
+model Time {
+    id         String    @id @default(uuid())
+    time       Int
+    available  Boolean   @default(true)
+    created_at DateTime  @default(now())
+    updated_at DateTime?
+
+    //relations
+    agendas Agenda[] @relation("x_agenda_x_times")
+
+    @@map("times")
+}

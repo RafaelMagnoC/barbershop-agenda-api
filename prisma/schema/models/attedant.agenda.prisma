@@ -1,0 +1,14 @@
+model AttendantAgenda {
+    //relation
+    attendant_id String
+    attendant    Attendant @relation(fields: [attendant_id], references: [id], onDelete: Cascade)
+
+    agenda_id String
+    agenda    Agenda @relation(fields: [agenda_id], references: [id], onDelete: Cascade)
+
+    created_at DateTime  @default(now())
+    updated_at DateTime?
+
+    @@id([attendant_id, agenda_id])
+    @@map("x_attendant_x_agenda")
+}

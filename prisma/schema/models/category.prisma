@@ -2,7 +2,7 @@ model Category {
     id          String    @id @default(uuid())
     name        String    @unique
     description String?
-    is_active   Boolean   @default(true)
+    status      Boolean   @default(true)
     created_at  DateTime  @default(now())
     updated_at  DateTime?
 

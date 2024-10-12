@@ -1,0 +1,4 @@
+model AppointmentDefault {
+    id       String               @id @default(uuid())
+    services AppointmentService[]
+}

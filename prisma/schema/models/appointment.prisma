@@ -1,0 +1,15 @@
+model Appointment {
+    id         String            @id @default(uuid())
+    date       DateTime          @db.Date
+    hour       DateTime          @db.Time
+    status     AppointmentStatus @default(scheduled)
+    created_at DateTime          @default(now())
+    updated_at DateTime?
+
+    //relations
+    client_id String
+    client    Client @relation(fields: [client_id], references: [id])
+
+    attendant_id String
+    attendant    Attendant @relation(fields: [attendant_id], references: [id])
+}

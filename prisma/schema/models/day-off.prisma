@@ -1,0 +1,13 @@
+model DayOff {
+    id           String    @id @default(uuid())
+    dayOfMonth   Int? // Dia fixo do mês (1-31)
+    dayOfWeek    WeekDays? // Dia da semana
+    is_recurring Boolean   @default(false) // Indica se é um dia fixo ou da semana
+
+    //relations
+    user_id String // Referência ao usuário
+    user    User?  @relation(fields: [user_id], references: [id]) // Relacionamento com o modelo User
+
+    Enterprise    Enterprise? @relation(fields: [enterprise_id], references: [id])
+    enterprise_id String?
+}

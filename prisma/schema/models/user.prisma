@@ -4,7 +4,7 @@ model User {
   birthday   DateTime
   gender     Gender
   username   String?   @unique
-  is_active  Boolean   @default(true)
+  status     Boolean   @default(true)
   token      String?   @unique
   created_at DateTime  @default(now())
   updated_at DateTime?
@@ -28,6 +28,7 @@ model User {
 
   // relation with enterprise
   enterprises UserEnterprise[]
+  dayOffs     DayOff[]
 
   @@map("user")
 }

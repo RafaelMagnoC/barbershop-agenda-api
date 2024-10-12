@@ -3,7 +3,7 @@ model Club {
     name        String    @unique
     description String?
     price       Float?
-    is_active   Boolean   @default(true)
+    status      Boolean   @default(true)
     created_at  DateTime  @default(now())
     updated_at  DateTime?
 

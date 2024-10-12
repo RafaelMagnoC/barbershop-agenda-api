@@ -5,12 +5,13 @@ model Service {
     price       Float?
     time        Int?
     comission   Float?
-    is_active   Boolean   @default(true)
+    status      Boolean   @default(true)
     created_at  DateTime  @default(now())
     updated_at  DateTime?
 
     // relations
-    club ClubService[]
+    club         ClubService[]
+    appointments AppointmentService[]
 
     //map
     @@map("service")

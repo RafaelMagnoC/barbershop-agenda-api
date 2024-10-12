@@ -4,7 +4,7 @@ model Enterprise {
   social_reason String
   cnpj          String    @unique
   logo          String?
-  is_active     Boolean
+  status        Boolean   @default(true)
   created_at    DateTime  @default(now())
   updated_at    DateTime?
 
@@ -14,7 +14,8 @@ model Enterprise {
   contact    Contact? @relation(fields: [contact_id], references: [id])
   contact_id String?  @unique
 
-  users UserEnterprise[]
+  users   UserEnterprise[]
+  dayOffs DayOff[]
 
   //map
   @@map("enterprise")
