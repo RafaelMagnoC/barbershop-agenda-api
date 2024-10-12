@@ -10,4 +10,6 @@ model DayOff {
 
     Enterprise    Enterprise? @relation(fields: [enterprise_id], references: [id])
     enterprise_id String?
+
+    @@map("dayoff")
 }

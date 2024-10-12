@@ -8,8 +8,8 @@ model Agenda {
     updated_at DateTime?
 
     //relations
-    attendant AttendantAgenda[]
-    times     Time[]            @relation("x_agenda_x_times")
+    attendant    AttendantAgenda[]
+    agenda_times AgendaTime[]
 
     @@map("agenda")
 }

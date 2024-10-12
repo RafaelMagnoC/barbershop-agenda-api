@@ -1,0 +1,12 @@
+model AgendaTime {
+    agenda_id  String
+    time_id    String
+    created_at DateTime  @default(now())
+    updated_at DateTime?
+
+    agenda Agenda @relation(fields: [agenda_id], references: [id])
+    time   Time   @relation(fields: [time_id], references: [id])
+
+    @@id([agenda_id, time_id])
+    @@map("x_agenda_x_times")
+}

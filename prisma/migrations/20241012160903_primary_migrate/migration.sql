@@ -28,6 +28,77 @@ CREATE TABLE `administrator` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `agenda` (
+    `id` VARCHAR(191) NOT NULL,
+    `date` DATE NOT NULL,
+    `start_time` TIME NOT NULL,
+    `end_time` TIME NOT NULL,
+    `working` BOOLEAN NOT NULL DEFAULT true,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `x_agenda_x_times` (
+    `agenda_id` VARCHAR(191) NOT NULL,
+    `time_id` VARCHAR(191) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`agenda_id`, `time_id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `AppointmentClub` (
+    `id` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `AppointmentDefault` (
+    `id` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Appointment` (
+    `id` VARCHAR(191) NOT NULL,
+    `date` DATE NOT NULL,
+    `hour` TIME NOT NULL,
+    `status` ENUM('scheduled', 'in_progress', 'canceled', 'completed') NOT NULL DEFAULT 'scheduled',
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
+    `client_id` VARCHAR(191) NOT NULL,
+    `attendant_id` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `x_appointment_x_service` (
+    `appointment_id` VARCHAR(191) NOT NULL,
+    `service_id` VARCHAR(191) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`appointment_id`, `service_id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `x_attendant_x_agenda` (
+    `attendant_id` VARCHAR(191) NOT NULL,
+    `agenda_id` VARCHAR(191) NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
+
+    PRIMARY KEY (`attendant_id`, `agenda_id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `attendant` (
     `id` VARCHAR(191) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -43,7 +114,7 @@ CREATE TABLE `category` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `description` VARCHAR(191) NULL,
-    `is_active` BOOLEAN NOT NULL DEFAULT true,
+    `status` BOOLEAN NOT NULL DEFAULT true,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NULL,
 
@@ -68,7 +139,7 @@ CREATE TABLE `club` (
     `name` VARCHAR(191) NOT NULL,
     `description` VARCHAR(191) NULL,
     `price` DOUBLE NULL,
-    `is_active` BOOLEAN NOT NULL DEFAULT true,
+    `status` BOOLEAN NOT NULL DEFAULT true,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NULL,
 
@@ -108,6 +179,18 @@ CREATE TABLE `contact` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `dayoff` (
+    `id` VARCHAR(191) NOT NULL,
+    `dayOfMonth` INTEGER NULL,
+    `dayOfWeek` ENUM('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday') NULL,
+    `is_recurring` BOOLEAN NOT NULL DEFAULT false,
+    `user_id` VARCHAR(191) NOT NULL,
+    `enterprise_id` VARCHAR(191) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `develop` (
     `id` VARCHAR(191) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -140,7 +223,7 @@ CREATE TABLE `enterprise` (
     `social_reason` VARCHAR(191) NOT NULL,
     `cnpj` VARCHAR(191) NOT NULL,
     `logo` VARCHAR(191) NULL,
-    `is_active` BOOLEAN NOT NULL,
+    `status` BOOLEAN NOT NULL DEFAULT true,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NULL,
     `address_id` VARCHAR(191) NULL,
@@ -171,11 +254,22 @@ CREATE TABLE `service` (
     `price` DOUBLE NULL,
     `time` INTEGER NULL,
     `comission` DOUBLE NULL,
-    `is_active` BOOLEAN NOT NULL DEFAULT true,
+    `status` BOOLEAN NOT NULL DEFAULT true,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NULL,
 
     UNIQUE INDEX `service_name_key`(`name`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `times` (
+    `id` VARCHAR(191) NOT NULL,
+    `time` INTEGER NOT NULL,
+    `available` BOOLEAN NOT NULL DEFAULT true,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NULL,
+
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -196,7 +290,7 @@ CREATE TABLE `user` (
     `birthday` DATETIME(3) NOT NULL,
     `gender` ENUM('male', 'female', 'other', 'prefer_not_to_say') NOT NULL,
     `username` VARCHAR(191) NULL,
-    `is_active` BOOLEAN NOT NULL DEFAULT true,
+    `status` BOOLEAN NOT NULL DEFAULT true,
     `token` VARCHAR(191) NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NULL,
@@ -220,6 +314,30 @@ CREATE TABLE `user` (
 ALTER TABLE `address` ADD CONSTRAINT `address_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE `x_agenda_x_times` ADD CONSTRAINT `x_agenda_x_times_agenda_id_fkey` FOREIGN KEY (`agenda_id`) REFERENCES `agenda`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `x_agenda_x_times` ADD CONSTRAINT `x_agenda_x_times_time_id_fkey` FOREIGN KEY (`time_id`) REFERENCES `times`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Appointment` ADD CONSTRAINT `Appointment_client_id_fkey` FOREIGN KEY (`client_id`) REFERENCES `client`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Appointment` ADD CONSTRAINT `Appointment_attendant_id_fkey` FOREIGN KEY (`attendant_id`) REFERENCES `attendant`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `x_appointment_x_service` ADD CONSTRAINT `x_appointment_x_service_appointment_id_fkey` FOREIGN KEY (`appointment_id`) REFERENCES `AppointmentDefault`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `x_appointment_x_service` ADD CONSTRAINT `x_appointment_x_service_service_id_fkey` FOREIGN KEY (`service_id`) REFERENCES `service`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `x_attendant_x_agenda` ADD CONSTRAINT `x_attendant_x_agenda_attendant_id_fkey` FOREIGN KEY (`attendant_id`) REFERENCES `attendant`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `x_attendant_x_agenda` ADD CONSTRAINT `x_attendant_x_agenda_agenda_id_fkey` FOREIGN KEY (`agenda_id`) REFERENCES `agenda`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `x_club_x_service` ADD CONSTRAINT `x_club_x_service_service_id_fkey` FOREIGN KEY (`service_id`) REFERENCES `service`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -227,6 +345,12 @@ ALTER TABLE `x_club_x_service` ADD CONSTRAINT `x_club_x_service_club_id_fkey` FO
 
 -- AddForeignKey
 ALTER TABLE `contact` ADD CONSTRAINT `contact_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `dayoff` ADD CONSTRAINT `dayoff_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `dayoff` ADD CONSTRAINT `dayoff_enterprise_id_fkey` FOREIGN KEY (`enterprise_id`) REFERENCES `enterprise`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `document` ADD CONSTRAINT `document_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

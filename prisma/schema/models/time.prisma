@@ -6,7 +6,7 @@ model Time {
     updated_at DateTime?
 
     //relations
-    agendas Agenda[] @relation("x_agenda_x_times")
+    agenda_times AgendaTime[]
 
     @@map("times")
 }
