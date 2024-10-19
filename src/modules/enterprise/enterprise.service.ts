@@ -13,14 +13,14 @@ export class EnterpriseService {
     this.baseService = new BaseService<EnterpriseEntity, CreateEnterpriseDto, CreateEnterpriseDto>(prisma, 'enterprise');
   }
   async create(createEnterpriseDto: CreateEnterpriseDto): Promise<EnterpriseEntity> {
-    const { address, contact, name, social_reason, cnpj, logo, is_active } = createEnterpriseDto;
+    const { address, contact, name, social_reason, cnpj, logo, status } = createEnterpriseDto;
     const enterprise: EnterpriseEntity = await this.prisma.enterprise.create({
       data: {
         name: name,
         social_reason: social_reason,
         cnpj: cnpj,
         logo: logo,
-        is_active: is_active,
+        status: status,
         address: {
           create: address,
         },

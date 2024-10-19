@@ -18,6 +18,8 @@ import { DevelopModule } from './modules/develop/develop.module';
 import { ClientModule } from './modules/client/client.module';
 import { ReceptionistModule } from './modules/receptionist/receptionist.module';
 import { AgendaModule } from './modules/agenda/agenda.module';
+import { AppointmentModule } from './modules/appointment/appointment.module';
+import { ProductModule } from './modules/product/product.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -41,6 +43,8 @@ import { AgendaModule } from './modules/agenda/agenda.module';
     ClientModule,
     ReceptionistModule,
     AgendaModule,
+    AppointmentModule,
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],

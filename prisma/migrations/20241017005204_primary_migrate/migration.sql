@@ -74,7 +74,9 @@ CREATE TABLE `Appointment` (
     `updated_at` DATETIME(3) NULL,
     `client_id` VARCHAR(191) NOT NULL,
     `attendant_id` VARCHAR(191) NOT NULL,
+    `appointment_default_id` VARCHAR(191) NULL,
 
+    UNIQUE INDEX `Appointment_appointment_default_id_key`(`appointment_default_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -324,6 +326,9 @@ ALTER TABLE `Appointment` ADD CONSTRAINT `Appointment_client_id_fkey` FOREIGN KE
 
 -- AddForeignKey
 ALTER TABLE `Appointment` ADD CONSTRAINT `Appointment_attendant_id_fkey` FOREIGN KEY (`attendant_id`) REFERENCES `attendant`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Appointment` ADD CONSTRAINT `Appointment_appointment_default_id_fkey` FOREIGN KEY (`appointment_default_id`) REFERENCES `AppointmentDefault`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `x_appointment_x_service` ADD CONSTRAINT `x_appointment_x_service_appointment_id_fkey` FOREIGN KEY (`appointment_id`) REFERENCES `AppointmentDefault`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

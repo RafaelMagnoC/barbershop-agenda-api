@@ -7,7 +7,7 @@ export class EnterpriseEntity {
   social_reason: string;
   cnpj: string;
   logo?: string;
-  is_active: boolean;
+  status: boolean;
   created_at: Date;
   updated_at?: Date;
 

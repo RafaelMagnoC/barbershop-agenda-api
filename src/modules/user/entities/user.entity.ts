@@ -18,7 +18,7 @@ export class UserEntity {
 
   gender: string;
 
-  is_active: boolean;
+  status: boolean;
 
   @Exclude()
   token: string;

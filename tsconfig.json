@@ -39,7 +39,8 @@
       "@enterprise/*": ["src/modules/enterprise/*"],
       "@administrator/*": ["src/modules/administrator/*"],
       "@receptionist/*": ["src/modules/receptionist/*"],
-      "@prismaService/*": ["src/config/database/*"]
+      "@prismaService/*": ["src/config/database/*"],
+      "@appointment/*": ["src/modules/appointment/*"]
     }
   }
 }

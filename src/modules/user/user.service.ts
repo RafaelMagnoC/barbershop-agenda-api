@@ -19,7 +19,7 @@ export class UserService {
    * @returns O usuário criado.
    */
   async create(createUserDto: CreateUserDto): Promise<UserEntity> {
-    const { address, contact, name, birthday, gender, username, is_active } = createUserDto;
+    const { address, contact, name, birthday, gender, username, status } = createUserDto;
 
     const user: UserEntity = await this.prisma.user.create({
       data: {
@@ -27,7 +27,7 @@ export class UserService {
         username: username,
         birthday: birthday,
         gender: gender,
-        is_active: is_active,
+        status: status,
         address: {
           create: address,
         },

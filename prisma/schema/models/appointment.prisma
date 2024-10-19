@@ -12,4 +12,7 @@ model Appointment {
 
     attendant_id String
     attendant    Attendant @relation(fields: [attendant_id], references: [id])
+
+    appointment_default_id String?             @unique
+    appointmentDefault     AppointmentDefault? @relation(fields: [appointment_default_id], references: [id])
 }

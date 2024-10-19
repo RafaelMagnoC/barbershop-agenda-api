@@ -42,7 +42,7 @@ export class CreateUserDto {
     default: true,
   })
   @IsBoolean({ message: 'Determine se o usuário está ativo ou inativo' })
-  is_active: boolean;
+  status: boolean;
 
   //relacionamentos
 

@@ -42,7 +42,7 @@ export class CreateEnterpriseDto {
   })
   @IsBoolean()
   @IsDefined()
-  is_active: boolean;
+  status: boolean;
 
   @ApiProperty({
     description: 'Contato do usuário',

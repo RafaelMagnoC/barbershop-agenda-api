@@ -1,4 +1,7 @@
 model AppointmentDefault {
-    id       String               @id @default(uuid())
-    services AppointmentService[]
+    id String @id @default(uuid())
+
+    //relations
+    appointment Appointment?
+    services    AppointmentService[]
 }
