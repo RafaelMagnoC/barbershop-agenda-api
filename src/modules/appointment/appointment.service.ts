@@ -7,31 +7,66 @@ import { AppointmentDefault } from '@prisma/client';
 @Injectable()
 export class AppointmentService {
   constructor(readonly prisma: PrismaService) {}
-  async create_appointment_default(createAppointmentDto: CreateAppointmentDefaultDto): Promise<AppointmentDefault | undefined> {
-    const { services } = createAppointmentDto;
-    const { date, hour, client_id, attendant_id } = createAppointmentDto.appointment;
+  async create_appointment_default(createAppointmentDefaultDto: CreateAppointmentDefaultDto): Promise<Object | undefined> {
+    const { services, appointment } = createAppointmentDefaultDto;
+
+    const AppointmentStatusText = {
+      0: 'agendado',
+      1: 'em atendimento',
+      2: 'cancelado',
+      3: 'concluído',
+    };
 
     const appointment_default = await this.prisma.appointmentDefault.create({
       data: {
+        appointment: {
+          create: {
+            date: appointment.date,
+            hour: appointment.hour,
+            client_id: appointment.client_id,
+            attendant_id: appointment.attendant_id,
+          },
+        },
         services: {
-          create: services.map((service_id) => ({
-            service: { connect: { id: service_id } },
+          create: services.map((service) => ({
+            service: {
+              connect: { id: service.service_id },
+            },
           })),
         },
       },
-    });
-
-    const appointment = await this.prisma.appointment.create({
-      data: {
-        date,
-        hour,
-        client: { connect: { id: client_id } },
-        attendant: { connect: { id: attendant_id } },
-        appointmentDefault: { connect: { id: appointment_default.id } },
+      include: {
+        services: true, // Inclua os serviços se necessário
       },
     });
 
-    return appointment_default ? appointment_default : undefined;
+    const attendant = await this.prisma.attendant.findUnique({
+      where: { id: appointment.attendant_id },
+      include: { user: true },
+    });
+
+    return {
+      date: this.formatDateToBrazilian(appointment.date.toString()),
+      hour: this.extractTime(appointment.hour),
+      status: AppointmentStatusText[appointment.status],
+      attendant: attendant.user.name,
+      statusCode: 201,
+      message: 'Agendamento realizado com sucesso!',
+    };
+  }
+
+  formatDateToBrazilian(isoString: string): string {
+    const date = new Date(isoString);
+    const day = String(date.getDate()).padStart(2, '0'); // Adiciona zero à esquerda se necessário
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Mês começa em 0
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`; // Formato DD/MM/YYYY
+  }
+
+  extractTime(isoString: string): string {
+    const date = new Date(isoString);
+    return date.toTimeString().split(' ')[0]; // Retorna a hora no formato HH:MM:SS
   }
 
   findAll() {

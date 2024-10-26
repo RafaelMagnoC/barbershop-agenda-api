@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { AppointmentStatus } from '@enums/appointment.status.enum';
-import { IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsDateString, IsEnum, IsNotEmpty, IsObject, IsOptional, IsString } from 'class-validator';
 
 export class UpdateAppointmentDto {
   @ApiProperty({
@@ -35,9 +35,24 @@ export class UpdateAppointmentDto {
   updated_at: string = new Date().toLocaleString('pt-BR');
 
   @ApiProperty({
+    description: 'id do cliente',
+    type: String,
+  })
+  @IsString()
+  client_id: string;
+
+  @ApiProperty({
     description: 'id do atendente',
     type: String,
   })
   @IsString()
   attendant_id: string;
+
+  @ApiProperty({
+    description: 'ids dos serviços escolhidos pelo cliente',
+    example: '1863481468764, 219-7493127549-2057',
+    type: String,
+  })
+  @IsObject()
+  services: string;
 }

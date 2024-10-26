@@ -32,7 +32,7 @@ export class CreateAppointmentDto {
     type: String,
   })
   @IsString()
-  client_id?: string;
+  client_id: string;
 
   @ApiProperty({
     description: 'id do atendente',

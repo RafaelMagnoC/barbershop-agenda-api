@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsObject } from 'class-validator';
+import { IsArray, IsDefined, IsObject, IsString, ValidateNested } from 'class-validator';
 import { CreateAppointmentDto } from '../create-appointment.dto';
 import { CreateAppointmentServiceDto } from '../create-appointment-service.dto';
+import { Type } from 'class-transformer';
 
 export class CreateAppointmentDefaultDto {
   @ApiProperty({
@@ -13,9 +14,11 @@ export class CreateAppointmentDefaultDto {
   appointment?: CreateAppointmentDto;
 
   @ApiProperty({
-    description: 'serviços escolhido pelo cliente',
-    type: [String],
+    description: 'ids dos serviços',
+    type: [CreateAppointmentServiceDto],
   })
-  @IsObject()
-  services: string[];
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateAppointmentServiceDto) // Necessário para transformação
+  services: CreateAppointmentServiceDto[];
 }
